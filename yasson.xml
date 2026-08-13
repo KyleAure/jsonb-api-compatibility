@@ -11,15 +11,15 @@
         <relativePath>pom.xml</relativePath>
     </parent>
 
-    <artifactId>johnzon-test</artifactId>
+    <artifactId>yasson-test</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
-        <!-- Apache Johnzon JSON-B implementation -->
+        <!-- Eclipse Yasson JSON-B implementation -->
         <dependency>
-            <groupId>org.apache.johnzon</groupId>
-            <artifactId>johnzon-jsonb</artifactId>
-            <version>${johnzon.version}</version>
+            <groupId>org.eclipse.yasson</groupId>
+            <artifactId>yasson</artifactId>
+            <version>${yasson.version}</version>
         </dependency>
 
         <!-- Jakarta JSON Binding API -->
@@ -29,7 +29,7 @@
             <version>${jakarta.json.bind.version}</version>
         </dependency>
 
-        <!-- Jakarta JSON Processing API (required by Johnzon) -->
+        <!-- Jakarta JSON Processing API (required by Yasson) -->
         <dependency>
             <groupId>jakarta.json</groupId>
             <artifactId>jakarta.json-api</artifactId>
@@ -50,7 +50,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.5.3</version>
             </plugin>
         </plugins>
     </build>

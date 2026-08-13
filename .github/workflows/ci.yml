@@ -1,12 +1,25 @@
-name: CI
+name: Run tests
 
 on:
-  push:
-    branches:
-      - 'main'
-  pull_request:
-    branches:
-      - 'main'
+  workflow_dispatch:
+    inputs:
+      jdk-version:
+        description: 'JDK version to use'
+        required: true
+        default: '17'
+        type: choice
+        options:
+          - 17
+          - 21
+          - 25
+      implementation:
+        description: 'Implementation to test (yasson or johnzon)'
+        required: true
+        default: 'yasson'
+        type: choice
+        options:
+          - yasson
+          - johnzon
 
 jobs:
   build:
@@ -14,13 +27,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-    - name: Set up JDK 17
+    - name: Set up JDK ${{ github.event.inputs.jdk-version }}
       uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961 # v5.7.0
       with:
-        java-version: 17
+        java-version: ${{ github.event.inputs.jdk-version }}
         distribution: 'temurin'
         cache: maven
-    - name: Test Yasson
-      run: mvn clean test
-    - name: Test Johnzon
-      run: mvn -f johnzon.xml clean test
+    - name: Test ${{ github.event.inputs.implementation }}
+      run: mvn clean test -f ${{ github.event.inputs.implementation }}.xml
