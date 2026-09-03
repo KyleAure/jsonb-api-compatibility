@@ -8,7 +8,7 @@ public class FactoryPublicSetter {
     private String a;
 
     @JsonbCreator
-    public FactoryPublicSetter create(@JsonbProperty("a") String a) {
+    public static FactoryPublicSetter create(@JsonbProperty("a") String a) {
         FactoryPublicSetter inst = new FactoryPublicSetter();
         inst.a = a.toUpperCase();
         return inst;
